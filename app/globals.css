@@ -1,0 +1,105 @@
+:root {
+  --plum: #5b3a52;
+  --plum-dark: #3d2636;
+  --blush: #f4e9ee;
+  --sage: #8a9a83;
+  --cream: #faf6f2;
+  --text: #3a2f36;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Georgia', 'Iowan Old Style', serif;
+  background: var(--cream);
+  color: var(--text);
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.6rem;
+  color: var(--plum);
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.brand-sub {
+  text-align: center;
+  color: var(--sage);
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(91, 58, 82, 0.08);
+  margin-bottom: 1rem;
+}
+
+button.primary {
+  background: var(--plum);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #e2d5dd;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rating-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rating-btn {
+  flex: 1;
+  padding: 0.6rem 0;
+  border-radius: 8px;
+  border: 1px solid #e2d5dd;
+  background: white;
+  cursor: pointer;
+}
+
+.rating-btn.selected {
+  background: var(--plum);
+  color: white;
+  border-color: var(--plum);
+}
+
+.label {
+  font-size: 0.85rem;
+  color: var(--sage);
+  margin-bottom: 0.4rem;
+  display: block;
+}

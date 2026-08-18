@@ -1,0 +1,13 @@
+{
+  "name": "YourGoingToBeOK Symptom Tracker",
+  "short_name": "YGTBO Tracker",
+  "description": "A gentle way to track how you're really doing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf6f2",
+  "theme_color": "#5b3a52",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
