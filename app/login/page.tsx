@@ -1,105 +1,106 @@
+
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
-const [email, setEmail] = useState('')
-const [code, setCode] = useState('')
-const [sent, setSent] = useState(false)
-const [loading, setLoading] = useState(false)
-const [error, setError] = useState(null)
-const supabase = createClient()
-const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
+  const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const supabase = createClient()
+  const router = useRouter()
 
-async function sendCode(e) {
-e.preventDefault()
-setLoading(true)
-setError(null)
-const { error } = await supabase.auth.signInWithOtp({ email: email })
-setLoading(false)
-if (error) setError(error.message)
-else setSent(true)
-}
+  async function sendCode(e) {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    const { error } = await supabase.auth.signInWithOtp({ email: email })
+    setLoading(false)
+    if (error) setError(error.message)
+    else setSent(true)
+  }
 
-async function verifyCode(e) {
-e.preventDefault()
-setLoading(true)
-setError(null)
-const { error } = await supabase.auth.verifyOtp({
-email: email,
-token: code,
-type: 'email',
-})
-setLoading(false)
-if (error) setError(error.message)
-else router.push('/tracker')
-}
+  async function verifyCode(e) {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    const { error } = await supabase.auth.verifyOtp({
+      email: email,
+      token: code,
+      type: 'email',
+    })
+    setLoading(false)
+    if (error) setError(error.message)
+    else router.push('/tracker')
+  }
 
-async function signInWithGoogle() {
-var redirectUrl = window.location.origin + '/auth/callback'
-await supabase.auth.signInWithOAuth({
-provider: 'google',
-options: { redirectTo: redirectUrl },
-})
-}
+  async function signInWithGoogle() {
+    var redirectUrl = window.location.origin + '/auth/callback'
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: redirectUrl },
+    })
+  }
 
-async function signInWithApple() {
-var redirectUrl = window.location.origin + '/auth/callback'
-await supabase.auth.signInWithOAuth({
-provider: 'apple',
-options: { redirectTo: redirectUrl },
-})
-}
+  async function signInWithApple() {
+    var redirectUrl = window.location.origin + '/auth/callback'
+    await supabase.auth.signInWithOAuth({
+      provider: 'apple',
+      options: { redirectTo: redirectUrl },
+    })
+  }
 
-return (
-<div className="container">
-<h1 className="brand-title">YourGoingToBeOK</h1>
-<p className="brand-sub">You are going to be okay. Let us track how you are really doing.</p>
-<div className="card">
-{sent ? (
-<form onSubmit={verifyCode}>
-<p style={{ marginBottom: '0.75rem' }}>We sent a 6-digit code to your email. Enter it below.</p>
-<label className="label">Code</label>
-<input
-type="text"
-inputMode="numeric"
-required
-value={code}
-onChange={(e) => setCode(e.target.value)}
-placeholder="123456"
-/>
-<button className="primary" type="submit" disabled={loading}>
-{loading ? 'Verifying...' : 'Verify and sign in'}
-</button>
-{error && <p style={{ color: 'crimson', marginTop: '0.75rem' }}>{error}</p>}
-</form>
-) : (
-<form onSubmit={sendCode}>
-<label className="label">Email</label>
-<input
-type="email"
-required
-value={email}
-onChange={(e) => setEmail(e.target.value)}
-placeholder="you@example.com"
-/>
-<button className="primary" type="submit" disabled={loading}>
-{loading ? 'Sending...' : 'Send me a sign-in code'}
-</button>
-{error && <p style={{ color: 'crimson', marginTop: '0.75rem' }}>{error}</p>}
-</form>
-)}
-</div>
-<div style={{ textAlign: 'center', color: 'gray', margin: '0.5rem 0' }}>or</div>
-<div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-<button className="primary" style={{ background: 'dodgerblue' }} onClick={signInWithGoogle}>
-Continue with Google
-</button>
-<button className="primary" style={{ background: 'black' }} onClick={signInWithApple}>
-Continue with Apple
-</button>
-</div>
-</div>
-)
+  return (
+    <div className="container">
+      <h1 className="brand-title">YourGoingToBeOK</h1>
+      <p className="brand-sub">You are going to be okay. Let us track how you are really doing.</p>
+      <div className="card">
+        {sent ? (
+          <form onSubmit={verifyCode}>
+            <p style={{ marginBottom: '0.75rem' }}>We sent a 6-digit code to your email. Enter it below.</p>
+            <label className="label">Code</label>
+            <input
+              type="text"
+              inputMode="numeric"
+              required
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="123456"
+            />
+            <button className="primary" type="submit" disabled={loading}>
+              {loading ? 'Verifying...' : 'Verify and sign in'}
+            </button>
+            {error && <p style={{ color: 'crimson', marginTop: '0.75rem' }}>{error}</p>}
+          </form>
+        ) : (
+          <form onSubmit={sendCode}>
+            <label className="label">Email</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+            />
+            <button className="primary" type="submit" disabled={loading}>
+              {loading ? 'Sending...' : 'Send me a sign-in code'}
+            </button>
+            {error && <p style={{ color: 'crimson', marginTop: '0.75rem' }}>{error}</p>}
+          </form>
+        )}
+      </div>
+      <div style={{ textAlign: 'center', color: 'gray', margin: '0.5rem 0' }}>or</div>
+      <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <button className="primary" style={{ background: 'dodgerblue' }} onClick={signInWithGoogle}>
+          Continue with Google
+        </button>
+        <button className="primary" style={{ background: 'black' }} onClick={signInWithApple}>
+          Continue with Apple
+        </button>
+      </div>
+    </div>
+  )
 }
