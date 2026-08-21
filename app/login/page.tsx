@@ -13,7 +13,7 @@ export default function LoginPage() {
   const supabase = createClient()
   const router = useRouter()
 
-  async function sendCode(e) {
+  async function sendCode(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
@@ -23,7 +23,7 @@ export default function LoginPage() {
     else setSent(true)
   }
 
-  async function verifyCode(e) {
+  async function verifyCode(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
