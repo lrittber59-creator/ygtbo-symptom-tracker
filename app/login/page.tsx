@@ -16,7 +16,7 @@ async function sendCode(e) {
 e.preventDefault()
 setLoading(true)
 setError(null)
-const { error } = await supabase.auth.signInWithOtp({ email })
+const { error } = await supabase.auth.signInWithOtp({ email: email })
 setLoading(false)
 if (error) setError(error.message)
 else setSent(true)
@@ -91,11 +91,9 @@ placeholder="you@example.com"
 </form>
 )}
 </div>
-<div style={{ textAlign: 'center', color: '
-#8a9a83', margin: '0.5rem 0' }}>or</div>
+<div style={{ textAlign: 'center', color: 'gray', margin: '0.5rem 0' }}>or</div>
 <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-<button className="primary" style={{ background: '
-#4285F4' }} onClick={signInWithGoogle}>
+<button className="primary" style={{ background: 'dodgerblue' }} onClick={signInWithGoogle}>
 Continue with Google
 </button>
 <button className="primary" style={{ background: 'black' }} onClick={signInWithApple}>
