@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [code, setCode] = useState('')
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const supabase = createClient()
   const router = useRouter()
 
